@@ -29,4 +29,6 @@ Best trading strategy is selected based on how much it outperforms the current m
     - ```%pip install tensorflow```
     - ```%pip install keras```
 
-    
+## References
+1. [Oreily Python for Algorithmic Trading Book](https://learning.oreilly.com/library/view/python-for-algorithmic/9781492053347/)
+2. [Oreily Python for Algorithmic Github Repo](https://github.com/yhilpisch/py4at)
