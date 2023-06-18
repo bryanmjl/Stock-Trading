@@ -23,7 +23,7 @@ def SimpleMovingAverage(period1, period2, df, col, amount, tc):
     ========================
     Transformed dataframe df
     aperf as absolute performance of strategy itself
-    operf as difference between strategy and base stock reurns itself
+    operf as difference between strategy and base stock returns itself
     '''
     
     # Calculate SMA1 and SMA2 
@@ -72,7 +72,7 @@ def Momentum(n, df, col, amount, tc):
     ========================
     Transformed dataframe df
     aperf as absolute performance of strategy itself
-    operf as difference between strategy and base stock reurns itself
+    operf as difference between strategy and base stock rteurns itself
     '''
 
     # Calculate returns
@@ -120,7 +120,7 @@ def MeanReversion(n, df, col, threshold, amount, tc):
     ========================
     Transformed dataframe df
     aperf as absolute performance of strategy itself
-    operf as difference between strategy and base stock reurns itself
+    operf as difference between strategy and base stock returns itself
     '''
     # Calculate returns SMA and threshold differences
     df['returns'] = np.log(df[col] / df[col].shift(1))
@@ -156,7 +156,7 @@ def drawdown(df, col):
     About
     =======================
     Function to calculate maximum drawdown period (How much an investment is down from peak before it recovers to peak)
-    To be used in conjunction with either functions such as "SimpleMovingAverage", "Momentum" or "MeanReversion"
+    To be used in conjunction with functions such as "SimpleMovingAverage", "Momentum" or "MeanReversion", etc
 
     Attributes
     ========================
@@ -165,7 +165,7 @@ def drawdown(df, col):
 
     Returns
     ========================
-    Drawdown period
+    Drawdown period -> Can be used as min or max, etc
     '''
 
     drawdown = df[col].cummax() - df[col]

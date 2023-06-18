@@ -29,6 +29,8 @@ def OLS(df, target_col, lags, amount, tc):
     Returns
     ========================
     Transformed dataframe df with predicted values from OLS
+    aperf as absolute performance of strategy itself
+    operf as difference between strategy and base stock returns itself
     '''
 
     # Prepare dataset and calculate returns
@@ -91,6 +93,8 @@ def logreg(df, target_col, lags, amount, tc):
     Returns
     ========================
     Transformed dataframe df with predicted values from logistic regression
+    aperf as absolute performance of strategy itself
+    operf as difference between strategy and base stock returns itself
     '''
 
     # Prepare dataset and calculate returns
@@ -127,6 +131,7 @@ def logreg(df, target_col, lags, amount, tc):
 
     return df, aperf, operf
 
+
 # Neural network
 def neural_network(df, target_col, lags, amount, tc):
     '''
@@ -145,6 +150,8 @@ def neural_network(df, target_col, lags, amount, tc):
     Returns
     ========================
     Transformed dataframe df with predicted values from neural network
+    aperf as absolute performance of strategy itself
+    operf as difference between strategy and base stock returns itself
     '''
 
     # Prepare dataset and calculate returns
@@ -159,7 +166,7 @@ def neural_network(df, target_col, lags, amount, tc):
         df[col] = df['return'].shift(lag)
         cols.append(col)
     
-    # Initialise Keras Model
+    # Initialise Keras Model (Adam) and Layers (Dense)
     optimizer = Adam(learning_rate=0.0001)
     model = Sequential()
 
@@ -201,10 +208,8 @@ def neural_network(df, target_col, lags, amount, tc):
     training_data['creturns'] = amount * training_data['return'].cumsum().apply(np.exp)
     training_data['cstrategy'] = amount * training_data['strategy'].cumsum().apply(np.exp)
 
-    # Gross performance of strategy
+    # Calculate absolute performance and out/underperformance of strategy
     aperf = training_data['cstrategy'].iloc[-1]
-
-    # Out or under-performance of strategy
     operf = aperf - training_data['creturns'].iloc[-1]
 
     return training_data, aperf, operf
